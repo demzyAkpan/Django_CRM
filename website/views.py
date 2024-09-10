@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm 
+from .models import Record
  
 def home(request):
+    #grabs every item in the databse table and assigns it to this variable
+    records = Record.objects.all()
+
     #check to see if logging in
     if request.method == 'POST':
         username = request.POST['username']
@@ -18,7 +22,7 @@ def home(request):
             messages.success(request, "There was an error logging in, please enter the correct etails and try again")
             return redirect('home')
     else:
-        return render(request, 'home.html', {}) #empty context dictionary{}
+        return render(request, 'home.html', {'records':records}) #empty context dictionary{}
 
 # def login_user(request):
 #     pass
@@ -45,3 +49,9 @@ def register_user(request):
         form = SignUpForm()
         return render(request, 'register.html', {'form': form   })
     return render(request, 'register.html', {'form': form  })
+
+def customer_records(request, pk):
+    if request.user.is_authenticated:
+        #look up records
+        customer_records = Record.objects.get(id=pk)
+        

@@ -1,9 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
     {% if user.is_authenticated %}
-        <h1>Hello World!</h1>
+
+       
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Zipcode</th>
+                <th scope="col">Created_at</th>
+                <th scope="col">ID</th>
+              </tr>
+        </thead>
+        <tbody>
+          
+      
+        {% if records %}
+            {% for records in records %}
+            <tr>
+ 
+               <td>{{ records.first_name }}
+                {{ records.last_name }}</td>
+                <td>{{ records.email }}</td>
+                <td>{{ records.phone }}</td>
+                <td>{{ records.address }}</td>
+                <td>{{ records.city }}</td>
+                <td>{{ records.state }}</td>
+                <td>{{ records.zipcode }}</td>
+                <td> {{ records.created_at }}</td>
+                <td>{{ records.id }}</td>
+              
+            </tr>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+
+          
+        </tr>
+        </tbody>
+        </table>
+            
+
+        <!-- pulling recorrds from database-->
+        
+
+
     {% else %}
          
         <br/>
@@ -20,6 +70,9 @@
             <br/>
             <button type="submit" class="btn btn-secondary">Login</button>
         </form>
-    </div>
+   
     {% endif %}
 {% endblock %}
+
+
+
