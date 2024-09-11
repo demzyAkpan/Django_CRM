@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="card">
+    <div class="card-header">
+        <!-- {{ customer_records.first_name }}
+        {{ customer_records.last_name }} -->
+        {{ customer_records.full_name|title }}
+    </div>
+    <div class="card-body">
+<p class="card-text">
+    <p class="card-text"></p><strong>Email: </strong>{{ customer_records.email }}</p>
+
+    <p class="card-text"></p><strong>contact: </strong>{{ customer_records.phone}}</p>
+
+    <p class="card-text"></p><strong>Address: </strong>{{ customer_records.address}}</p>
+
+    <p class="card-text"></p><strong>City: </strong>{{ customer_records.city }}</p>
+
+    <p class="card-text"></p><strong>State: </strong>{{ customer_records.state }}</p>
+
+    <p class="card-text"></p><strong>Zipcode: </strong>{{ customer_records.zipcode }}</p>
+    
+    <p class="card-text"></p><strong>Created at: </strong>{{ customer_records.created_at }}</p>
+
+</p>  
+  </div>
+  </div>
+
+
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back
+</a>
+<!-- <a href="{% url 'delete' customer_records.id %}" class="btn btn-danger">Delete
+</a> -->
+<!-- Button trigger modal -->
+<button href="{% url 'delete' customer_records.id %}" class="btn btn-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Delete
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+
+
+{% endblock %}
+
+
