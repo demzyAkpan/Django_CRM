@@ -9,7 +9,8 @@
     <div class="card-header">
         <!-- {{ customer_records.first_name }}
         {{ customer_records.last_name }} -->
-        {{ customer_records.full_name|title }}
+        <strong>{{ customer_records.first_name | title }}
+        {{ customer_records.last_name | title }}</strong>
     </div>
     <div class="card-body">
 <p class="card-text">
@@ -38,29 +39,43 @@
 </a>
 <!-- <a href="{% url 'delete' customer_records.id %}" class="btn btn-danger">Delete
 </a> -->
+
+
 <!-- Button trigger modal -->
-<button href="{% url 'delete' customer_records.id %}" class="btn btn-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Delete
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
+
+<button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Delete
+</button>
+
+
+<a href="{% url 'update_record' customer_records.id %}" class="btn btn-secondary">Update Record
+</a>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Are You sure You want to Delete This</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      This Record Will be Permanently Deleted, click continue to Delete.
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      
+      <!-- Form for deletion -->
+      <form method="POST" action="{% url 'delete' customer_records.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Continue</button>
+      </form>
     </div>
   </div>
+</div>
+</div>
 
     
   
