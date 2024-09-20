@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Record
- 
+
+
+
 def home(request):
     records = Record.objects.all()
 
@@ -25,10 +27,13 @@ def home(request):
 #     pass
 
 #logout functionality
+
+
 def logout_user(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
     return redirect('home')
+
 
 def register_user(request):
     if request.method == 'POST':
@@ -47,6 +52,7 @@ def register_user(request):
     return render(request, 'register.html', {'form': form})
 
 
+
 def customer_records(request, pk):
     if request.user.is_authenticated:
         #look up records
@@ -55,6 +61,7 @@ def customer_records(request, pk):
     else:
         messages.success(request, 'Must be logged in to view this page ')
         return redirect('home')  
+
 
 def delete_record(request, pk):
     if request.user.is_authenticated:
@@ -65,6 +72,7 @@ def delete_record(request, pk):
     else:
         messages.success(request, 'You must be logged in before you can perform this action')
         return redirect('home')
+
 
 def add_record(request):
     if request.user.is_authenticated:
@@ -78,7 +86,8 @@ def add_record(request):
     else:
         messages.error(request, 'You must be logged in to add a record')
         return redirect('home')
-    
+   
+
 def update_record(request, pk):
     if request.user.is_authenticated:
         current_record = Record.objects.get(id=pk)
